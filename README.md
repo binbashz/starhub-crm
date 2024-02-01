@@ -1,4 +1,10 @@
-# StarHub CRM
+#                                   <p align="center">StarHub CRM</p>
+
+
+<p align="center">
+  <img src="https://media.giphy.com/media/LT1Pq74cXuNQxyUmLk/giphy.gif" width="300">
+</p>
+
 
 StarHub CRM is a modern and efficient Customer Relationship Management (CRM) application that simplifies the management of leads and clients. This README provides an overview of key features and instructions for using the application.
 
