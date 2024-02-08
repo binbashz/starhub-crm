@@ -1,6 +1,12 @@
+from typing import Any
 from django.contrib.auth.decorators import login_required
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 
 from .forms import AddLeadForm
 from .models import Lead
@@ -8,31 +14,47 @@ from .models import Lead
 from client.models import Client
 from team.models import Team
 
-@login_required
-def leads_list(request):
-    leads = Lead.objects.filter(created_by=request.user, converted_to_client=False)
+class LeadListView(ListView):
+    model = Lead
     
-    return render(request, 'lead/leads_list.html', {
-        'leads': leads
-    })
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
-@login_required
-def leads_detail(request, pk):
-    lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
+    def get_queryset(self):
+        queryset = super(LeadListView,self).get_queryset()
+        
+        return queryset.filter(created_by=self.request.user, converted_to_client=False)
     
     
-    return render(request, 'lead/leads_detail.html', {
-        'lead': lead
-    })
+class LeadDetailView(DetailView):
+    model = Lead
+    
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+    
+    def get_queryset(self):
+        queryset = super(LeadDetailView,self).get_queryset()
+        
+        return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
+        
+class LeadDeleteView(DeleteView):
+    model = Lead
+    success_url = reverse_lazy('leads:list')
 
-@login_required
-def leads_delete(request, pk):
-    lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
-    lead.delete()
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        queryset = super(LeadDeleteView, self).get_queryset()
+
+        return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
     
-    messages.success(request, "The lead was deleted.")
-    
-    return redirect('leads:list')
+    def get(self, request, *args, **kwargs):
+            return self.post(request, *args, **kwargs)
+
 
 @login_required
 def leads_edit(request, pk):
