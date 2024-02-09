@@ -1,10 +1,13 @@
 {% extends 'core/base.html' %}
 
-{% block title %} Edit lead {% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
 <div class="py-6 px-6">
-<h1 class="text-xl">Edit lead</h1>
+<h1 class="text-xl">{{ title }}</h1>
+
+
+{% if team.plan.max_leads > team.leads.count or title == 'Edit lead' %}
 
     <form method="post" action=".">
         {% csrf_token %}
@@ -12,6 +15,11 @@
         {{ form.as_p }}
         <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
     </form>
+    {% else %}
+    <div class="mt-6 px-6 py-4 bg-red-500 rounded-xl text-white">
+        Your team have has reached maximum numbre of leads. Your owner must upgrade your plan
+    </div>
+    {% endif %}
 
 </div>
 {% endblock %}
