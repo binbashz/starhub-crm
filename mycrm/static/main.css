@@ -2,10 +2,10 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@200&display=swap');
 
 body {
-    font-family:sans-serif;
+    font-family: 'MuseoModerno', sans-serif;
     background: #1a202c; 
     color: #cbd5e0; 
     margin: 0;
@@ -52,23 +52,33 @@ nav a {
     z-index: 1;
 }
 
-footer {
-    background: #2d3748; 
-    color: #a0aec0; 
-}
-
 
 /* stlye sign-up */
 
-/* Estilos para el formulario de registro */
-
 .container {
+    position: relative; 
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(228, 16, 16, 0.9);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    color: white;
+    font-family: 'MuseoModerno', sans-serif;
+    font-weight: 100;
+}
+
+.container::before {
+    content: ''; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNjAwJyBoZWlnaHQ9JzYwMCcgdmlld0JveD0nMCAwIDE1MCAxNTAnPgo8ZmlsdGVyIGlkPSdpJyB4PScwJyB5PScwJz4KCTxmZUNvbG9yTWF0cml4IHR5cGU9J21hdHJpeCcgdmFsdWVzPScxIDAgMCAwIDAgIDAgMSAwIDAgMCAgMCAwIDEgMCAwICAwIDAgMCAwIDAnIC8+CjwvZmlsdGVyPgo8ZmlsdGVyIGlkPSduJyB4PScwJyB5PScwJz4KCTxmZVR1cmJ1bGVuY2UgdHlwZT0ndHVyYnVsZW5jZScgYmFzZUZyZXF1ZW5jeT0nLjcnIHJlc3VsdD0nZnV6eicgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPgoJPGZlQ29tcG9zaXRlIGluPSdTb3VyY2VHcmFwaGljJyBpbjI9J2Z1enonIG9wZXJhdG9yPSdhcml0aG1ldGljJyBrMT0nMCcgazI9JzEnIGszPSctNzMnIGs0PScuMDEnIC8+CjwvZmlsdGVyPgo8cmVjdCB3aWR0aD0nMTAyJScgaGVpZ2h0PScxMDIlJyBmaWxsPScjMDMwMzFhJy8+CjxyZWN0IHg9Jy0xJScgeT0nLTElJyB3aWR0aD0nMTAyJScgaGVpZ2h0PScxMDIlJyBmaWxsPScjZmZmZmZmJyBmaWx0ZXI9J3VybCgjbiknIG9wYWNpdHk9JzEnLz4KPHJlY3QgeD0nLTElJyB5PSctMSUnIHdpZHRoPScxMDIlJyBoZWlnaHQ9JzEwMiUnIGZpbGw9JyMwMzAzMWEnIGZpbHRlcj0ndXJsKCNpKScgb3BhY2l0eT0nMScvPgo8L3N2Zz4=');
+    opacity: 0.3; 
+    z-index: -1; 
 }
 
 form {
@@ -82,6 +92,7 @@ form {
 
 .form-label {
     font-weight: bold;
+    color: #ffffff;
 }
 
 input[type="text"],
@@ -91,17 +102,27 @@ input[type="password"] {
     padding: 10px;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #00ff6a;
 }
 
+/* Estilos para el botón de "Sign Up" */
 button[type="submit"] {
     padding: 10px 20px;
-    background-color: #16e7c4;
+    background-image: linear-gradient(to right, rgb(130, 204, 238), rgb(0, 139, 53));
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-image 0.3s ease; 
 }
 
+/* Efecto al pasar el cursor sobre el botón */
 button[type="submit"]:hover {
-    background-color: #9e0a63;
+    background-image: linear-gradient(to right, #485dbd, rgb(105, 24, 129));
+}
+
+footer {
+    background: #2d3748; 
+    color: #a0aec0; 
 }

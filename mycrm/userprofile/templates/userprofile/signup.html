@@ -10,27 +10,28 @@
 {% block title %} Sign up {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="mb-4">Sign Up</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="id_username" class="form-label">Username</label>
-            {{ form.username }}
-        </div>
-        <div class="mb-3">
-            <label for="id_email" class="form-label">Email address</label>
-            {{ form.email }}
-        </div>
-        <div class="mb-3">
-            <label for="id_password1" class="form-label">Password</label>
-            {{ form.password1 }}
-        </div>
-        <div class="mb-3">
-            <label for="id_password2" class="form-label">Confirm Password</label>
-            {{ form.password2 }}
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
+<div class="body-signup">
+    <div class="container mt-5 mb-5"> 
+        <h1 class="mb-6 text-3xl font-bold">Sign Up</h1>
+        <form method="post" action=".">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                {{ form.username }}
+            </div>
+         
+            <div class="mb-3">
+                <label for="id_password1" class="form-label">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="mb-3">
+                <label for="id_password2" class="form-label">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
 </div>
+    <br>
+       <br>
 {% endblock %}
