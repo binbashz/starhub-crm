@@ -1,18 +1,36 @@
 {% extends 'core/base.html' %}
 
+{% load static %}
+
+{% block extra_css %}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock %}
+
 {% block title %} Sign up {% endblock %}
 
 {% block content %}
-<h1 class="text-xl">Sign Up</h1>
-
-<form method="post" action=".">
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
-</form>
-
-
-
+<div class="container mt-5">
+    <h1 class="mb-4">Sign Up</h1>
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email address</label>
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="id_password1" class="form-label">Password</label>
+            {{ form.password1 }}
+        </div>
+        <div class="mb-3">
+            <label for="id_password2" class="form-label">Confirm Password</label>
+            {{ form.password2 }}
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
 {% endblock %}
