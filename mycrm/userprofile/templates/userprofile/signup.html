@@ -11,8 +11,21 @@
 
 {% block content %}
 <div class="body-signup">
+
+    {% if form.errors %}
+        <div class="max-w-md mx-auto mt-4">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <div class="bg-red-500 text-white font-bold rounded-md p-1 mb-2 text-sm">{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="container mt-5 mb-5"> 
         <h1 class="mb-6 text-3xl font-bold">Sign Up</h1>
+
+        <h4> Registration</h4><br>
         <form method="post" action=".">
             {% csrf_token %}
             <div class="mb-3">
@@ -35,13 +48,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="id_plan" class="form-label">Free Plan</label>
-                {% for plan in form.plan %}
-                <div class="flex items-center">
-                    <input type="radio" name="{{ form.plan.html_name }}" id="{{ plan.id_for_label }}" value="{{ plan.choice_value }}" class="bg-gray-100 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-purple-500">
-                    <label for="{{ plan.id_for_label }}" class="ml-2 text-gray-700">{{ plan.instance.get_plan_display }}</label>
-                </div>
-                {% endfor %}
+                <label for="id_plan" class="form-label">Plan</label>
+                <select name="plan" id="id_plan" class="form-select">
+                    <option value="" selected disabled>Selecciona un plan</option>
+                    {% for plan in form.plan.field.choices %}
+                        <option value="{{ plan.0 }}">{{ plan.1 }}</option>
+                    {% endfor %}
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Sign Up</button>
