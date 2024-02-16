@@ -2,37 +2,38 @@
 
 {% block title %} Dashboard {% endblock %}
 
-{% block content %}
-<div class="py-6 px-6">
-    <h1 class="mb-6 text-xl">Dashboard</h1>
 
-    <div class="flex space-x-4">
-        <div class="w-1/2 px-4 py-6 bg-indigo-900 rounded-xl leads">
-            <h2 class="mb-4 text-lg">Newest leads</h2>
-            <hr class="my-4">
+{% block content %}
+<div class="container max-w-4/5 mx-auto py-6 px-6">
+    <h1 class="mb-6 text-3xl font-bold">Dashboard</h1>
+
+    <div class="grid grid-cols-2 gap-4">
+        <div class="p-4 bg-indigo-900 rounded-xl leads">
+            <h2 class="mb-4 text-2xl font-semibold text-white">Newest leads</h2>
+            <hr class="my-4 border-indigo-700">
 
             {% for lead in leads %}
-            <div clas="mb-2 lead">
-                <h3 class="font-semibold">{{ lead.name }}</h3>
+            <div class="mb-2 lead">
+                <h3 class="text-xl font-bold text-white">{{ lead.name }}</h3>
 
-                <p class="text-xs">Status: {{ lead.get_status_display }}</p>
-                <p class="text-xs">Priority: {{ lead.get_priority_display }}</p>
+                <p class="text-sm text-indigo-300">Status: {{ lead.get_status_display }}</p>
+                <p class="text-sm text-indigo-300">Priority: {{ lead.get_priority_display }}</p>
 
-                <a href="{% url 'leads:detail' lead.pk %}"> Details</a>
+                <a href="{% url 'leads:detail' lead.pk %}" class="text-indigo-100 hover:text-indigo-200"> Details</a>
             </div>
 
             {% endfor %}
         </div>
 
-        <div class="w-1/2 px-4 py-6 bg-indigo-900 rounded-xl clients">
-            <h2 class="mb-4 text-lg">Newest clients</h2>
-            <hr class="my-4">
+        <div class="p-4 bg-indigo-900 rounded-xl clients">
+            <h2 class="mb-4 text-2xl font-semibold text-white">Newest clients</h2>
+            <hr class="my-4 border-indigo-700">
 
             {% for client in clients %}
-            <div clas="mb-2 client">
-                <h3 class="font-semibold">{{ client.name }}</h3>
+            <div class="mb-2 client">
+                <h3 class="text-xl font-bold text-white">{{ client.name }}</h3>
 
-                <a href="{% url 'clients:detail' client.pk %}"> Details</a>
+                <a href="{% url 'clients:detail' client.pk %}" class="text-indigo-100 hover:text-indigo-200"> Details</a>
             </div>
 
             {% endfor %}

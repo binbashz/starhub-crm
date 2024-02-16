@@ -3,62 +3,69 @@
 {% block title %}{{ lead.name }}{% endblock %}
 
 {% block content %}
-<div class="py-6 px-6">
-<h1 class="mb-4 text-xl">{{ lead.name }}</h1>
+<div class=" container mx-auto rounded-lg shadow-md overflow-hidden">
+    <div class="p-6">
+        <h1 class="mb-4 text-2xl font-bold">{{ lead.name }}</h1>
 
-{% if lead.description %}
-    <p class="font-semibold">Name</p>
-    <p class="mb-3">{{ lead.description }}</p>
-    {% endif %}
+        {% if lead.description %}
+            <div class="mb-4">
+                <p class="font-semibold">Description:</p>
+                <p>{{ lead.description }}</p>
+            </div>
+        {% endif %}
 
-    <p class="font-semibold">Priority</p>
-    <p class="mb-3">{{ lead.get_priority_display }}</p>
+        <div class="mb-4">
+            <p class="font-semibold">Priority:</p>
+            <p>{{ lead.get_priority_display }}</p>
+        </div>
 
-    <p class="font-semibold">Status</p>
-    <p class="mb-3">{{ lead.get_status_display }}</p>
+        <div class="mb-4">
+            <p class="font-semibold">Status:</p>
+            <p>{{ lead.get_status_display }}</p>
+        </div>
 
-    <p class="font-semibold">Created at</p>
-    <p class="mb-3">{{ lead.created_at }}</p>
+        <div class="mb-4">
+            <p class="font-semibold">Created at:</p>
+            <p>{{ lead.created_at }}</p>
+        </div>
 
-    <p class="font-semibold">Modified at</p>
-    <p class="mb-7">{{ lead.modified_at }}</p>
+        <div class="mb-7">
+            <p class="font-semibold">Modified at:</p>
+            <p>{{ lead.modified_at }}</p>
+        </div>
 
-    <hr class="my-4">
-
-    <form id="lead_delete_form" method="post" action="{% url 'leads:delete' lead.id %}">
-        {% csrf_token %}
-    </form>
-
-        <a href="{% url 'leads:convert' lead.id %}" class="py-2 px-4 rounded-xl bg-purple-900 text-white">Convert to client</a>
-        <a href="{% url 'leads:edit' lead.id %}" class="py-2 px-4 rounded-xl bg-purple-500 text-white">Edit</a>
-        <a href="#" onclick="document.getElementById('lead_delete_form').submit();" class="py-2 px-4 rounded-xl bg-red-700 text-white">Delete</a>
-       
         <hr class="my-4">
 
-        <h2 class="mb-6 text-xl">Comments</h2>
+        <form id="lead_delete_form" method="post" action="{% url 'leads:delete' lead.id %}">
+            {% csrf_token %}
+            <div class="space-x-2">
+                <a href="{% url 'leads:convert' lead.id %}" class="py-2 px-4 rounded-lg bg-purple-900 text-white">Convert to client</a>
+                <a href="{% url 'leads:edit' lead.id %}" class="py-2 px-4 rounded-lg bg-purple-500 text-white">Edit</a>
+                <a href="#" onclick="document.getElementById('lead_delete_form').submit();" class="py-2 px-4 rounded-lg bg-red-700 text-white">Delete</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="p-6 rounded-b-lg">
+        <h2 class="mb-6 text-xl font-bold">Comments</h2>
 
         <div class="space-y-4">
             {% for comment in lead.comments.all %}
-                <div class="bg-gray-700 p-6 rounded-xl">
-                    <p class="mb-2"><strong>{{ comment.created_by }}</strong> @ {{ comment.created_at }}</p>
-                    
-                    {{ comment.content }}
+                <div class="bg-red p-4 rounded-lg shadow-md">
+                    <p><strong>{{ comment.created_by }}</strong> @ {{ comment.created_at }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
             {% endfor %}
         </div>
 
-        <form method="post" action="{% url 'leads:add_comment' lead.id %}">
+        <form method="post" action="{% url 'leads:add_comment' lead.id %}" class="mt-6">
             {% csrf_token %}
-
             {{ form.as_p }}
-
-            <button class="py-2 px-4 rounded-xl bg-purple-900 text-white">Submit</button>
+            
+            <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
         </form>
-
-    <hr class="my-4">
-
-
-
-    <a href="{% url 'leads:list' %}"> Back to leads</a>
+    </div>
 </div>
 
+<a href="{% url 'leads:list' %}" class="block text-blue-500 mt-4">Back to leads</a>
 {% endblock %}

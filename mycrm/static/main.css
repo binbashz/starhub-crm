@@ -53,6 +53,30 @@ nav a {
 }
 
 
+/* nav bottons */
+
+
+a.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    
+    background: linear-gradient(180deg, #65bce8 0%, #3e0157 100%);
+   
+    transition: background 0.3s;
+  }
+  
+ 
+  a.boton:hover {
+    /* Fondo degradado final */
+    background-image: linear-gradient(to right, rgb(130, 204, 238), rgb(0, 139, 53));
+  }
+  
+
 /* stlye sign-up */
 
 .container {
@@ -122,7 +146,13 @@ button[type="submit"]:hover {
     background-image: linear-gradient(to right, #485dbd, rgb(105, 24, 129));
 }
 
+
+
+
+
+
 footer {
     background: #2d3748; 
     color: #a0aec0; 
 }
+
