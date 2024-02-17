@@ -1,17 +1,46 @@
 {% extends 'core/base.html' %}
 
-{% block title %} Edit client {% endblock %}
+{% block title %}Edit {{ client.name }}{% endblock %}
 
 {% block content %}
-<div class="py-6 px-6">
-<h1 class="text-xl">Edit client</h1>
+<div class="container mx-auto rounded-lg shadow-md overflow-hidden">
+    <div class="p-6">
+        <h1 class="mb-4 text-2xl font-bold">Edit {{ client.name }}</h1>
 
-    <form method="post" action=".">
-        {% csrf_token %}
+        <form method="post" action=".">
+            {% csrf_token %}
 
-        {{ form.as_p }}
-        <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
-    </form>
+            <!-- Campo de nombre -->
+            <div class="mb-4">
+                <label for="{{ form.name.id_for_label }}" class="font-semibold">Name:</label>
+                {{ form.name }}
+            </div>
 
+            <!-- Campo de correo electrónico -->
+            <div class="mb-4">
+                <label for="{{ form.email.id_for_label }}" class="font-semibold">Email:</label>
+                {{ form.email }}
+            </div>
+
+            <!-- Campo de descripción -->
+            <div class="mb-4">
+                <label for="{{ form.description.id_for_label }}" class="font-semibold">Description:</label>
+                {{ form.description }}
+            </div>
+
+            <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
+        </form>
+
+        <hr class="my-4">
+
+        <div class="space-x-2">
+            <a href="{% url 'clients:list' %}" class="block text-blue-500 mt-4">Back to clients</a>
+        </div>
+    </div>
 </div>
+
+<footer class="py-8 text-center bg-gray-800">
+    <p class="text-xs text-white">Copyright (c) 2024</p>
+</footer>
+
 {% endblock %}

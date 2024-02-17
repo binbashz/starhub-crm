@@ -3,37 +3,42 @@
 {% block title %}{{ client.name }}{% endblock %}
 
 {% block content %}
-<div class="py-6 px-6">
-<h1 class="mb-4 text-xl">{{ client.name }}</h1>
+<div class="container mx-auto rounded-lg shadow-md overflow-hidden">
+    <div class="p-6">
+        <h1 class="mb-4 text-2xl font-bold">{{ client.name }}</h1>
 
-{% if client.description %}
-    <p class="font-semibold">Description</p>
-    <p class="mb-3">{{ client.description }}</p>
-    {% endif %}
+        {% if client.description %}
+            <div class="mb-4">
+                <p class="font-semibold">Description:</p>
+                <p>{{ client.description }}</p>
+            </div>
+        {% endif %}
 
-    <p class="font-semibold">Created at</p>
-    <p class="mb-3">{{ client.created_at }}</p>
+        <div class="mb-4">
+            <p class="font-semibold">Created at:</p>
+            <p>{{ client.created_at }}</p>
+        </div>
 
-    <p class="font-semibold">Modified at</p>
-    <p class="mb-7">{{ client.modified_at }}</p>
-
-    <hr class="my-4">
-
-        <a href="{% url 'clients:edit' client.id %}" class="py-2 px-4 rounded-xl bg-purple-500 text-white">Edit</a>
-        <a href="{% url 'clients:delete' client.id %}" class="py-2 px-4 rounded-xl bg-red-700 text-white"> Delete</a>
-
+        <div class="mb-7">
+            <p class="font-semibold">Modified at:</p>
+            <p>{{ client.modified_at }}</p>
+        </div>
 
         <hr class="my-4">
 
+        <div class="space-x-2">
+            <a href="{% url 'clients:edit' client.id %}" class="py-2 px-4 rounded-lg bg-purple-500 text-white">Edit</a>
+            <a href="{% url 'clients:delete' client.id %}" class="py-2 px-4 rounded-lg bg-red-700 text-white">Delete</a>
+        </div>
 
-    <a href="{% url 'clients:list' %}"> Back to clients</a>
+        <hr class="my-4">
+
+        <a href="{% url 'clients:list' %}" class="block text-blue-500 mt-4">Back to clients</a>
+    </div>
+
+    <footer class="py-8 text-center bg-gray-800">
+        <p class="text-xs">Copyright (c) 2024</p>
+    </footer>
 </div>
-
-<footer class="py-8 text-center bg-gray-800">
-    <p class="text-xs">Copyright (c) 2024</p>
-</footer>
-</div>
-
 {% endblock %}
-
 

@@ -76,7 +76,14 @@ a.boton {
     background-image: linear-gradient(to right, rgb(130, 204, 238), rgb(0, 139, 53));
   }
   
-
+/* index text */
+.custom-text-size {
+    font-size: 30px;
+    color: white;
+    text-shadow: 
+        4px 4px 8px rgba(0, 0, 0, 0.9), 
+        -4px -4px 8px rgba(72, 0, 72, 0.5); 
+}
 /* stlye sign-up */
 
 .container {
