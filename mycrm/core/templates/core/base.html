@@ -34,9 +34,6 @@
             <a href="{% url 'login' %}" class="boton">Log in</a>
             <a href="{% url 'userprofile:signup' %}" class="boton">Sign up</a>
 
-
-
-
             {% endif %}
         </div>
     </nav>
@@ -51,17 +48,8 @@
     </div>
     {% endif %}
 
-    {% block content %}
+  {% block content %}
     {% endblock %}
-
-  
-    <footer class="py-8 text-center bg-gray-800">
-        <p class="text-xs">Copyright (c) 2024</p>
-    </footer>
-
-   
-
-
-
+    
 </body>
 </html>

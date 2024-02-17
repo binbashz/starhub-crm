@@ -65,7 +65,35 @@
             <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
         </form>
     </div>
+
+
+<hr class="my-4">
+<h2 class="mb-6 text-xl font-bold">Files</h2>
+
+<div class="space-y-4">
+    {% for file in lead.files.all %}
+        <div class="bg-red p-4 rounded-lg shadow-md">
+            <p><strong>{{ file.created_by }}</strong> @ {{ file.created_at }}</p>
+            <a href="{{ file.file.url }}"> Download</a>
+        </div>
+    {% endfor %}
+</div>
+
+<form method="post" action="{% url 'leads:add_file' lead.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ fileform.as_p }}
+    
+    <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
+</form>
 </div>
 
 <a href="{% url 'leads:list' %}" class="block text-blue-500 mt-4">Back to leads</a>
+
+
+
+<footer class="py-8 text-center bg-gray-800">
+    <p class="text-xs">Copyright (c) 2024</p>
+</footer>
+</div>
+
 {% endblock %}
