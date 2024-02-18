@@ -9,4 +9,6 @@ urlpatterns = [
     path('<int:pk>/delete/', views.client_delete, name='delete'),
     path('<int:pk>/edit/', views.clients_edit, name='edit'),
     path('add/', views.client_add, name='add'),
+    path('sales-activities/', views.list_sales_activities, name='list_sales_activities'),
+    path('create-sales-activity/', views.create_sales_activity, name='create_sales_activity'),
 ]

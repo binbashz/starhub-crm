@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Create Sales Activity{% endblock %}
+
+{% block content %}
+    <h1>Create Sales Activity</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

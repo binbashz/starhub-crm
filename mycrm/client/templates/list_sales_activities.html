@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block title %}List of Sales Activities{% endblock %}
+
+{% block content %}
+    <h1>List of Sales Activities</h1>
+    <ul>
+        {% for activity in sales_activities %}
+            <li>{{ activity.client.name }} - {{ activity.description }} - {{ activity.amount }} - {{ activity.date }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

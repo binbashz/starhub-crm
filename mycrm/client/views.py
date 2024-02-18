@@ -6,6 +6,9 @@ from .forms import AddClientForm
 from .models import Client
 from team.models import Team
 
+from .models import SalesActivity
+from .forms import SalesActivityForm
+
 @login_required
 def clients_list(request):
     clients = Client.objects.filter(created_by=request.user)
@@ -74,3 +77,21 @@ def client_delete(request, pk):
     messages.success(request, "The client was deleted.")
     
     return redirect('clients:list')
+
+@login_required
+def list_sales_activities(request):
+    sales_activities = SalesActivity.objects.all()
+    return render(request, 'list_sales_activities.html', {'sales_activities': sales_activities})
+
+@login_required
+def create_sales_activity(request):
+    if request.method == 'POST':
+        form = SalesActivityForm(request.POST)
+        if form.is_valid():
+            sales_activity = form.save(commit=False) 
+            sales_activity.created_by = request.user
+            sales_activity.save() 
+            return redirect('clients:list_sales_activities')
+    else:
+        form = SalesActivityForm()
+    return render(request, 'create_sales_activity.html', {'form': form})
