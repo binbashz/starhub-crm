@@ -153,8 +153,15 @@ button[type="submit"]:hover {
     background-image: linear-gradient(to right, #485dbd, rgb(105, 24, 129));
 }
 
+/* form create sales activity */
 
-
+/* colour of the text inside Django-generated input fields */
+#id_client,
+#id_description,
+#id_amount {
+    color: rgb(1, 63, 82); 
+    font-weight: bold;
+}
 
 footer {
     background: #2d3748; 
