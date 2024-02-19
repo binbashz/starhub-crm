@@ -9,6 +9,12 @@ from team.models import Team
 from .models import SalesActivity
 from .forms import SalesActivityForm
 
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+
+
 @login_required
 def clients_list(request):
     clients = Client.objects.filter(created_by=request.user)
@@ -95,3 +101,65 @@ def create_sales_activity(request):
     else:
         form = SalesActivityForm()
     return render(request, 'create_sales_activity.html', {'form': form})
+
+
+
+
+def generate_invoice(request):
+    if request.method == 'POST':
+        # Retrieve form data
+        client = request.POST.get('client')
+        quantity = request.POST.get('quantity')
+        unit_price = request.POST.get('unit_price')
+
+        # Generate PDF
+        pdf_filename = "invoice.pdf"
+        generate_pdf(client, quantity, unit_price, pdf_filename)
+
+        # Redirect to index
+        return redirect('index')
+
+    return render(request, 'generate_invoice.html')
+
+def generate_pdf(client, quantity, unit_price, pdf_filename):
+    # Create PDF document
+    doc = SimpleDocTemplate(pdf_filename, pagesize=letter)
+    
+    # Content of the invoice
+    content = [
+        ["Client", "Quantity", "Unit Price"],
+        [client, quantity, unit_price]
+    ]
+    
+    # Create table for the invoice
+    table = Table(content, colWidths=[200, 100, 100])
+    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+    
+    # Add table to the document
+    doc.build([table])
+    
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.conf import settings
+import os
+
+def download_invoice(request):
+    # Ruta al archivo PDF generado
+    pdf_filename = "invoice.pdf"
+    pdf_path = os.path.join(settings.BASE_DIR, pdf_filename)
+
+    # Verifica si el archivo existe
+    if os.path.exists(pdf_path):
+        # Abre el archivo PDF y devuelve como respuesta
+        with open(pdf_path, 'rb') as pdf_file:
+            response = HttpResponse(pdf_file.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
+            return response
+    else:
+        return HttpResponse("File not found", status=404)

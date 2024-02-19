@@ -29,6 +29,8 @@
             <a href="{% url 'leads:list' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Leads</a>
             <a href="{% url 'clients:list' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Clients</a>
             <a href="{% url 'clients:create_sales_activity' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Create Sales Activity</a>
+            <a href="{% url 'clients:generate_invoice' %}">Generate Invoice</a>
+            <a href="{% url 'clients:download_invoice' %}">Download Invoice</a>
             <a href="{% url 'userprofile:myaccount' %}" class="py-2 px-4 bg-teal-400 rounded-md text-white">My account</a>
                 {% else %}
             <a href="{% url 'login' %}" class="boton">Log in</a>

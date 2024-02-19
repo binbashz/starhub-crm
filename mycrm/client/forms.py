@@ -13,3 +13,5 @@ class SalesActivityForm(forms.ModelForm):
     class Meta:
         model = SalesActivity
         fields = ['client', 'description', 'amount', 'date']
+        
+        

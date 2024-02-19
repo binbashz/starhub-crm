@@ -1,3 +1,6 @@
+import os
+
+
 """
 Django settings for mycrm project.
 
@@ -63,7 +66,7 @@ ROOT_URLCONF = 'mycrm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +79,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mycrm.wsgi.application'
 
+WSGI_APPLICATION = 'mycrm.wsgi.application'
 
 
 

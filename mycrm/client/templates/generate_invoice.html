@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Generate Invoice {% endblock %}
+
+{% block content %}
+<div class="py-6 px-6">
+<h1 class="text-xl">Generate Invoice</h1>
+<br>
+
+
+    <form action="{% url 'clients:generate_invoice' %}" method="post">
+        {% csrf_token %}
+        <label for="client">Client:</label>
+        <input type="text" id="client" name="client">
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity">
+        <br>
+        <label for="unit_price">Unit Price:</label>
+        <input type="text" id="unit_price" name="unit_price">
+        <br>
+        <button type="submit">Generate Invoice</button>
+    </form>
+
+    {% endblock %}
