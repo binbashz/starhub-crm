@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/media/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/base' %}">  
     <link rel="stylesheet" href="{% static 'tailwindcss/components' %}">
@@ -20,8 +22,10 @@
 </head>
 <body>
     <nav class="py-6 px-6 flex justify-between relative bg-gradient-to-r from-teal-500 via-indigo-600 to-purple-700 bg-opacity-85">
-        <a href="/" class="text-white text-lg font-semibold">StarHub CRM</a>
-
+        <a href="/">
+            <img src="/media/LOGO.png" alt="StarHub CRM Logo" class="logo" style="width: 170px; height: auto;">
+        </a>
+        
         <div class="space-x-4">
             <a href="{% url 'about' %}" class="text-white">About</a>
             

@@ -20,6 +20,11 @@ from reportlab.platypus import Paragraph
 from django.conf import settings
 import os
 
+from django.http import HttpResponseRedirect
+import csv
+from django.core.mail import send_mail
+
+
 @login_required
 def clients_list(request):
     clients = Client.objects.filter(created_by=request.user)
@@ -229,3 +234,6 @@ def download_invoice(request):
             return response
     else:
         return HttpResponse("File not found", status=404)
+
+
+

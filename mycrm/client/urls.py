@@ -14,5 +14,6 @@ urlpatterns = [
     path('create-sales-activity/', views.create_sales_activity, name='create_sales_activity'),
     path('generate-invoice/', views.generate_invoice, name='generate_invoice'),
     path('download-invoice/', views.download_invoice, name='download_invoice'),
-    
+   
+
 ]

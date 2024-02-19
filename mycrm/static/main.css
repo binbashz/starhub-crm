@@ -200,6 +200,11 @@ input[type="number"] {
 }
 
 
+.logo {
+    margin-top: -14px; 
+  }
+  
+
 footer {
     background: #2d3748; 
     color: #a0aec0; 
