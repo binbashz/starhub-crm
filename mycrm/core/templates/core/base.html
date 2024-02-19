@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'tailwindcss/components' %}">
     <link rel="stylesheet" href="{% static 'tailwindcss/utilities' %}">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css" integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://unpkg.com/htmx.org"></script>
     <script src="https://unpkg.com/alpinejs"></script>
@@ -29,7 +30,7 @@
             <a href="{% url 'leads:list' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Leads</a>
             <a href="{% url 'clients:list' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Clients</a>
             <a href="{% url 'clients:create_sales_activity' %}" class="py-2 px-4 bg-purple-600 rounded-md text-white">Create Sales Activity</a>
-            <a href="{% url 'clients:list_sales_activities' %}" class="py-2 px-4 bg-teal-400 rounded-md text-white">📉</a>
+            <a href="{% url 'clients:list_sales_activities' %}" class="py-2 px-4 bg-teal-400 rounded-md text-white"><i class="fas fa-chart-bar" aria-hidden="true"></i></i></a>
             <a href="{% url 'clients:generate_invoice' %}">Generate Invoice</a>
             <a href="{% url 'clients:download_invoice' %}">Download Invoice</a>
             <a href="{% url 'userprofile:myaccount' %}" class="py-2 px-4 bg-teal-400 rounded-md text-white">My account</a>

@@ -12,9 +12,13 @@ from .forms import SalesActivityForm
 from django.http import HttpResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
-
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import Paragraph
 
+from django.conf import settings
+import os
 
 @login_required
 def clients_list(request):
@@ -144,6 +148,9 @@ def generate_invoice(request):
 
     return render(request, 'generate_invoice.html')
 
+
+
+
 def generate_pdf(client_name, client_address, client_contact, client_tax_id,
                  company_name, company_address, company_phone, company_email, company_tax_id,
                  invoice_number, invoice_date,
@@ -154,12 +161,22 @@ def generate_pdf(client_name, client_address, client_contact, client_tax_id,
 
     # Content of the invoice
     content = [
-        ["Client Name:", client_name, "Company Name:", company_name],
-        ["Client Address:", client_address, "Company Address:", company_address],
-        ["Client Contact:", client_contact, "Company Phone:", company_phone],
-        ["Client Tax ID:", client_tax_id, "Company Email:", company_email],
-        ["Invoice Number:", invoice_number, "Invoice Date:", invoice_date],
-        ["", "", "", ""],  # Empty row for spacing
+        ["Invoice Number:", invoice_number],
+        ["Invoice Date:", invoice_date],
+        ["", ""],  
+        ["Client:", ""],
+        ["Name:", client_name],
+        ["Address:", client_address],
+        ["Contact:", client_contact],
+        ["Tax ID:", client_tax_id],
+        ["", ""],  
+        ["Company:", ""],
+        ["Name:", company_name],
+        ["Address:", company_address],
+        ["Phone:", company_phone],
+        ["Email:", company_email],
+        ["Tax ID:", company_tax_id],
+        ["", ""],  # Empty row for spacing
         ["Description", "Quantity", "Unit Price", "Total"]
     ]
 
@@ -175,34 +192,37 @@ def generate_pdf(client_name, client_address, client_contact, client_tax_id,
         ["Due Date:", "", "", due_date]
     ])
 
+    # Define styles
+    styles = getSampleStyleSheet()
+    heading_style = styles["Heading1"]
+    paragraph_style = styles["BodyText"]
+
+    # Create Paragraphs for heading and content
+    heading = Paragraph("Invoice", heading_style)
+    content_paragraphs = [Paragraph(f"{row[0]} {row[1]}", paragraph_style) for row in content]
+
+    # Define table style
+    table_style = TableStyle([('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                              ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                              ('GRID', (0, 0), (-1, -1), 1, colors.black)])
+
     # Create table for the invoice
-    table = Table(content, colWidths=[200, 80, 80, 120], hAlign='LEFT')  
-    table.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-                               ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
-                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                               ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                               ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+    table = Table(content, colWidths=[250, 70, 70, 90], hAlign='LEFT')
+    table.setStyle(table_style)
 
-    # Add table to the document
-    doc.build([table])
-
+    # Build PDF document
+    doc.build([heading] + [Spacer(1, 20)] + content_paragraphs + [Spacer(1, 20), table])
     
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.conf import settings
-import os
+
 
 def download_invoice(request):
-    # Ruta al archivo PDF generado
+    
     pdf_filename = "invoice.pdf"
     pdf_path = os.path.join(settings.BASE_DIR, pdf_filename)
 
-    # Verifica si el archivo existe
+    
     if os.path.exists(pdf_path):
-        # Abre el archivo PDF y devuelve como respuesta
+       
         with open(pdf_path, 'rb') as pdf_file:
             response = HttpResponse(pdf_file.read(), content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
