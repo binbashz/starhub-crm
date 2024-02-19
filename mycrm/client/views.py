@@ -12,6 +12,7 @@ from .forms import SalesActivityForm
 from django.http import HttpResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
+
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
 
@@ -104,45 +105,90 @@ def create_sales_activity(request):
 
 
 
-
 def generate_invoice(request):
     if request.method == 'POST':
         # Retrieve form data
-        client = request.POST.get('client')
-        quantity = request.POST.get('quantity')
-        unit_price = request.POST.get('unit_price')
+        client_name = request.POST.get('client_name')
+        client_address = request.POST.get('client_address')
+        client_contact = request.POST.get('client_contact')
+        client_tax_id = request.POST.get('client_tax_id')
+
+        company_name = request.POST.get('company_name')
+        company_address = request.POST.get('company_address')
+        company_phone = request.POST.get('company_phone')
+        company_email = request.POST.get('company_email')
+        company_tax_id = request.POST.get('company_tax_id')
+
+        invoice_number = request.POST.get('invoice_number')
+        invoice_date = request.POST.get('invoice_date')
+
+        items = request.POST.getlist('item')
+        quantities = request.POST.getlist('quantity')
+        unit_prices = request.POST.getlist('unit_price')
+        totals = request.POST.getlist('total')
+
+        total_amount = request.POST.get('total_amount')
+        payment_method = request.POST.get('payment_method')
+        due_date = request.POST.get('due_date')
 
         # Generate PDF
         pdf_filename = "invoice.pdf"
-        generate_pdf(client, quantity, unit_price, pdf_filename)
+        generate_pdf(client_name, client_address, client_contact, client_tax_id,
+                     company_name, company_address, company_phone, company_email, company_tax_id,
+                     invoice_number, invoice_date,
+                     items, quantities, unit_prices, totals,
+                     total_amount, payment_method, due_date, pdf_filename)
 
         # Redirect to index
         return redirect('index')
 
     return render(request, 'generate_invoice.html')
 
-def generate_pdf(client, quantity, unit_price, pdf_filename):
+def generate_pdf(client_name, client_address, client_contact, client_tax_id,
+                 company_name, company_address, company_phone, company_email, company_tax_id,
+                 invoice_number, invoice_date,
+                 items, quantities, unit_prices, totals,
+                 total_amount, payment_method, due_date, pdf_filename):
     # Create PDF document
     doc = SimpleDocTemplate(pdf_filename, pagesize=letter)
-    
+
     # Content of the invoice
     content = [
-        ["Client", "Quantity", "Unit Price"],
-        [client, quantity, unit_price]
+        ["Client Name:", client_name, "Company Name:", company_name],
+        ["Client Address:", client_address, "Company Address:", company_address],
+        ["Client Contact:", client_contact, "Company Phone:", company_phone],
+        ["Client Tax ID:", client_tax_id, "Company Email:", company_email],
+        ["Invoice Number:", invoice_number, "Invoice Date:", invoice_date],
+        ["", "", "", ""],  # Empty row for spacing
+        ["Description", "Quantity", "Unit Price", "Total"]
     ]
-    
+
+    # Add items to the table
+    for item, quantity, unit_price, total in zip(items, quantities, unit_prices, totals):
+        content.append([item, quantity, unit_price, total])
+
+    # Add total and payment details
+    content.extend([
+        ["", "", "", ""],  # Empty row for spacing
+        ["Total Amount:", "", "", total_amount],
+        ["Payment Method:", "", "", payment_method],
+        ["Due Date:", "", "", due_date]
+    ])
+
     # Create table for the invoice
-    table = Table(content, colWidths=[200, 100, 100])
-    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    table = Table(content, colWidths=[200, 80, 80, 120], hAlign='LEFT')  
+    table.setStyle(TableStyle([('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                               ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
                                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
                                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
                                ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
-    
+
     # Add table to the document
     doc.build([table])
+
     
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
