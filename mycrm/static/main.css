@@ -169,6 +169,20 @@ button[type="submit"]:hover {
     background-image: linear-gradient(to right, #485dbd, rgb(105, 24, 129));
 }
 
+
+input[type="text"],
+input[type="email"],
+textarea {
+    color: #000000; 
+    background-color: #f3efef; 
+    }
+
+
+select {
+        color: #333; 
+        background-color: #7008d1; 
+        }
+
 /* form create sales activity */
 
 /* colour of the text inside Django-generated input fields */
