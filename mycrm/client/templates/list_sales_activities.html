@@ -10,68 +10,72 @@
 
         <div id="sales-chart" class="mb-8"></div>
 
-        <h1>List of Sales Activities</h1>
-        
         <ul>
             {% for activity in sales_activities %}
-                <li class="py-2 border-b">{{ activity.client.name }} - {{ activity.description }} - {{ activity.amount }} - {{ activity.date }}</li>
+                <li class="py-2 border-b">
+                    <form action="{% url 'clients:delete_sales_activity' activity.pk %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                    {{ activity.client.name }} - {{ activity.description }} - {{ activity.amount }} - {{ activity.date }}
+                </li>
             {% endfor %}
         </ul>
     </div>
 
-    <script>
-        // Create a list of customer names
-        var client_names = [];
-        {% for activity in sales_activities %}
-            client_names.push("{{ activity.client.name }}");
-        {% endfor %}
-        
-        // Create a list of sales activity amounts
-        var sales_amounts = [];
-        {% for activity in sales_activities %}
-            sales_amounts.push({{ activity.amount }});
-        {% endfor %}
-        
-        // Determine the minimum value among sales amounts
-        var minAmount = Math.min.apply(Math, sales_amounts);
-        
-        // Subtract a fixed value from the minimum amount to set yAxis min
-        var yAxisMin = minAmount - 1000; // You can adjust this value according to your needs
-        
-        // Ensure the minimum value is not negative
-        yAxisMin = yAxisMin < 0 ? 0 : yAxisMin;
-        
-        // Create the chart with Highcharts
-        Highcharts.chart('sales-chart', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Sales Activities by Client'
-            },
-            xAxis: {
-                categories: client_names,
-                crosshair: true
-            },
-            yAxis: {
-                min: yAxisMin,
-                max: 25000, // Here you set the maximum to 25000 USD
-                title: {
-                    text: 'Amount (USD)'
-                }
-            },
+</div>
 
-            plotOptions: {
-        column: {
-            color: 'aqua' 
-        }
-    },
-            series: [{
-                name: 'Sales',
-                data: sales_amounts
-            }]
-        });
-    </script>
+<script>
+    // Create a list of customer names
+    var client_names = [];
+    {% for activity in sales_activities %}
+        client_names.push("{{ activity.client.name }}");
+    {% endfor %}
     
+    // Create a list of sales activity amounts
+    var sales_amounts = [];
+    {% for activity in sales_activities %}
+        sales_amounts.push({{ activity.amount }});
+    {% endfor %}
     
+    // Determine the minimum value among sales amounts
+    var minAmount = Math.min.apply(Math, sales_amounts);
+    
+    // Subtract a fixed value from the minimum amount to set yAxis min
+    var yAxisMin = minAmount - 1000; // You can adjust this value according to your needs
+    
+    // Ensure the minimum value is not negative
+    yAxisMin = yAxisMin < 0 ? 0 : yAxisMin;
+    
+    // Create the chart with Highcharts
+    Highcharts.chart('sales-chart', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Sales Activities by Client'
+        },
+        xAxis: {
+            categories: client_names,
+            crosshair: true
+        },
+        yAxis: {
+            min: yAxisMin,
+            max: 25000, // Here you set the maximum to 25000 USD
+            title: {
+                text: 'Amount (USD)'
+            }
+        },
+        plotOptions: {
+            column: {
+                color: 'aqua' 
+            }
+        },
+        series: [{
+            name: 'Sales',
+            data: sales_amounts
+        }]
+    });
+</script>
+
 {% endblock %}

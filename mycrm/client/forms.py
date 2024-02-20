@@ -15,3 +15,6 @@ class SalesActivityForm(forms.ModelForm):
         fields = ['client', 'description', 'amount', 'date']
         
         
+
+
+

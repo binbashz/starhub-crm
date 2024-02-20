@@ -8,6 +8,7 @@ from team.models import Team
 
 from .models import SalesActivity
 from .forms import SalesActivityForm
+from .models import SalesActivity
 
 from django.http import HttpResponse
 from reportlab.lib import colors
@@ -20,9 +21,6 @@ from reportlab.platypus import Paragraph
 from django.conf import settings
 import os
 
-from django.http import HttpResponseRedirect
-import csv
-from django.core.mail import send_mail
 
 
 @login_required
@@ -111,6 +109,19 @@ def create_sales_activity(request):
     else:
         form = SalesActivityForm()
     return render(request, 'create_sales_activity.html', {'form': form})
+
+
+def delete_sales_activity(request, pk):
+    activity = get_object_or_404(SalesActivity, pk=pk)
+    if request.method == 'POST':
+        activity.delete()
+        
+        messages.success(request, 'The sales activity has been successfully deleted.')
+        
+        sales_activities = SalesActivity.objects.all()
+        return render(request, 'list_sales_activities.html', {'sales_activities': sales_activities})
+    
+    return redirect('clients:list_sales_activities')
 
 
 
@@ -233,7 +244,4 @@ def download_invoice(request):
             response['Content-Disposition'] = 'attachment; filename="invoice.pdf"'
             return response
     else:
-        return HttpResponse("File not found", status=404)
-
-
-
+        return HttpResponse("File not found, no recent files generated for download", status=404)
