@@ -16,7 +16,9 @@ nav {
     position: relative;
     background: linear-gradient(to right, #667eea, #764ba2); 
     overflow: hidden;
+    
 }
+
 
 nav::before,
 nav::after {
@@ -36,6 +38,18 @@ nav::before {
 nav::after {
     transform: skewX(30deg);
 }
+
+
+
+
+@media (max-width: 768px) {
+    a.boton {
+      padding: 8px 15px; 
+      font-size: 14px; 
+     
+    }
+  }
+  
 
 @keyframes neonEffect {
     0%, 100% {

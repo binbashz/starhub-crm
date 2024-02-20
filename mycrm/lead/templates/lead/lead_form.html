@@ -5,19 +5,18 @@
 {% block content %}
 <div class="container mx-auto rounded-lg shadow-md overflow-hidden">
     <div class="p-6">
+        
         <h1 class="mb-4 text-2xl font-bold">{{ title }}</h1>
 
         {% if team.plan.max_leads > team.leads.count or title == 'Edit lead' %}
             <form method="post" action=".">
                 {% csrf_token %}
 
-                <!-- Campo de nombre -->
                 <div class="mb-4">
                     <label for="{{ form.name.id_for_label }}" class="font-semibold">Name:</label>
                     {{ form.name }}
                 </div>
 
-                <!-- Campo de correo electrónico -->
                 <div class="mb-4">
                     <label for="{{ form.email.id_for_label }}" class="font-semibold">Email:</label>
                     {{ form.email }}
@@ -28,6 +27,18 @@
                     <label for="{{ form.description.id_for_label }}" class="font-semibold">Description:</label>
                     {{ form.description }}
                 </div>
+                
+                <div class="mb-4">
+                    <label for="{{ form.priority.id_for_label }}" class="font-semibold">Priority:</label>
+                    {{ form.priority }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.status.id_for_label }}" class="font-semibold">Status:</label>
+                    {{ form.status }}
+                </div>
+
+          
 
                 <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
             </form>
@@ -42,8 +53,8 @@
         {% endif %}
     </div>
 </div>
-    <footer class="py-8 text-center bg-gray-800">
-        <p class="text-xs text-white">Copyright (c) 2024</p>
-    </footer>
+<footer class="py-8 text-center bg-gray-800">
+    <p class="text-xs text-white">Copyright (c) 2024</p>
+</footer>
 
 {% endblock %}
