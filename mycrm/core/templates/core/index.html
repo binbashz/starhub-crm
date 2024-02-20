@@ -3,45 +3,64 @@
 {% block title %} StarHub CRM {% endblock %}
 
 {% block content %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StarHub CRM</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
   
-      <ul class="flex flex-row ml-auto">
-       
-  </header>
-
   <main class="container mx-auto py-10">
     <section class="bg-gradient-to-r from-blue-800 via-purple-400 to-indigo-950 shadow-lg rounded mb-10">
       <div class="p-4">
-        <h2 class="font-bold text-white-400 mb-12 text-center custom-text-size">Unlocking Your Business Potential</h2>
-
+        <h2 class="font-bold text-white-400 mb-2 text-center custom-text-size">Unlocking Your Business Potential</h2>
+        <h6 class="font-bold text-white-300 mb-7 text-center text-base custom-text-size">Obtain a Quick Overview of the Status of Every Negotiation</h6>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="bg-gray-900 p-4 rounded relative"> 
             <h3 class="font-bold text-gray-200 mb-2">Leads</h3> 
-            <p class="text-gray-300">Leads tracking</p> 
-            <h1 class="text-2xl  text-gray-100">10</h1> 
+            <ul class="text-gray-300">
+              <li>- Create, and edit lead information.</li>
+              <li>- List all leads for easy tracking.</li>
+              <li>- Detailed page view for each lead.</li>
+              <li>- Change or delete individual leads.</li>
+              <li>- Convert leads to clients seamlessly.</li>
+            </ul>
+            <p class="text-sm text-gray-300">Up to 10 leads with the basic plan</p>
           </div>
           <div class="bg-gray-900 p-4 rounded relative"> 
             <h3 class="font-bold text-gray-200 mb-2">Clients</h3> 
-            <p class="text-gray-300">Comments your clients</p> 
-            <h4 class="text-2xl  text-gray-100">10</h4> 
+            <ul class="text-gray-300">
+              <li>- Display a list of clients.</li>
+              <li>- Detailed page view for each client.</li>
+              <li>- Add, edit, and delete clients.</li>
+              <li>- Implement solutions tailored for teams.</li>
+            </ul>
+            <p class="text-sm text-gray-300">Up to 10 leads with the basic plan</p> 
           </div>
           <div class="bg-gray-900 p-4 rounded relative"> 
-            <h3 class="font-bold text-gray-200 mb-2">Clients tracking</h3> 
-            <p class="text-gray-300">Export information</p> 
-            <h4 class="text-2xl  text-gray-100">use plans</h4> 
+            <h3 class="font-bold text-gray-200 mb-2">Feautures</h3> 
+            <ul class="text-gray-300">
+              <li class="font-bold">- Latest clients and leads on our dashboard.</li>
+              <li class="font-bold">- Create Sales Activity</li>
+              <li class="font-bold">- List of Sales Activities</li>
+              <li class="font-bold">- You can graph sales activities</li>
+              <li class="font-bold">- Create PDF invoices from a form</li>
+            </ul>
           </div>
         </div>
-    </main>
-
-    <footer class="py-8 text-center bg-gray-800" style="position: absolute; bottom: 0; width: 100%;">
-        <p class="text-xs text-gray-200">Copyright (c) 2024</p> 
+      </div>
+    </section>
+ <br><br>
+    <footer class="py-8 text-center bg-gray-800" >
+      <p class="text-xs text-gray-200">Copyright (c) 2024</p> 
     </footer>
-    
+  </main>
+  
+</body>
+</html>
 {% endblock %}
 
     

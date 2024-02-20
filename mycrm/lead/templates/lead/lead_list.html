@@ -3,10 +3,12 @@
 {% block title %}Leads {% endblock %}
 
 {% block content %}
+
+
 <div class="py-6 px-6">
 <h1 class="mb-4 text-xl">Leads</h1>
 
-<a href="{% url 'leads:add_lead' %}" class="inline-block px-4 bg-purple-600 rounded-md text-white">Add lead</a>
+<a href="{% url 'leads:add_lead' %}" class="inline-block px-4 bg-purple-600 rounded-md text-white"> + Add lead</a>
 
 {% if object_list %}
 <div class="mt-6 flex justify-between">
