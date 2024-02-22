@@ -6,19 +6,21 @@
 
 
 <div class="py-6 px-6">
-<h1 class="mb-4 text-xl">Leads</h1>
+<h1 class="mb-4 text-xl text-white font-semibold">Leads</h1>
 
-<a href="{% url 'leads:add_lead' %}" class="inline-block px-4 bg-purple-600 rounded-md text-white"> + Add lead</a>
+<a href="{% url 'leads:add_lead' %}" class="inline-block px-4 bg-green-600 rounded-md text-white"> + Add lead</a>
 
 {% if object_list %}
-<div class="mt-6 flex justify-between">
+
+<div class="mt-6 flex  text-white justify-between">
     <p class="py-4 px-2 bg-gray-800 font-semibold w-full">Name</p>
     <p class="py-4 px-2 bg-gray-800 font-semibold w-full"">Priority</p>
     <p class="py-4 px-2 bg-gray-800 font-semibold w-full"">Status</p>
 </div>
+<hr>
 
 {% for lead in object_list %}
-<div class="mt-6 flex justify-between">
+<div class="mt-6 flex text-white justify-between">
     <p class="py-2 w-full {% cycle 'bg-gray-700' '' %}">
        <a href="{% url 'leads:detail' lead.id %}"> {{ lead.name }}</a>
     </p>
@@ -32,8 +34,14 @@
 {% endif %}
 </div>
 
-<footer class="py-8 text-center bg-gray-800">
-    <p class="text-xs">Copyright (c) 2024</p>
-</footer>
 </div>
+<br><br><br><br>
+<footer class="py-8  mt-11 text-center bg-gray-800">
+<p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+<p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+<p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+<p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+<p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+<p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+</footer>
 {% endblock %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'lead',
     'team',
     'userprofile',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

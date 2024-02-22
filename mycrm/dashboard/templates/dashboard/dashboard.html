@@ -2,50 +2,112 @@
 
 {% block title %} Dashboard {% endblock %}
 
-
 {% block content %}
+
 <div class="container max-w-4/5 mx-auto py-6 px-6">
     <h1 class="mb-6 text-3xl font-bold">Dashboard</h1>
 
     <div class="grid grid-cols-2 gap-4">
-        <div class="p-4 bg-indigo-900 rounded-xl leads">
-            <h2 class="mb-4 text-2xl font-semibold text-white">Newest leads</h2>
-            <hr class="my-4 border-indigo-700">
-
-            {% for lead in leads %}
-            <div class="mb-2 lead">
-                <h3 class="text-xl font-bold text-white">{{ lead.name }}</h3>
-
-                <p class="text-sm text-indigo-300">Status: {{ lead.get_status_display }}</p>
-                <p class="text-sm text-indigo-300">Priority: {{ lead.get_priority_display }}</p>
-
-                <a href="{% url 'leads:detail' lead.pk %}" class="text-indigo-100 hover:text-indigo-200"> Details</a>
-            </div>
-
-            {% endfor %}
-        </div>
-
-        <div class="p-4 bg-indigo-900 rounded-xl clients">
+        <div class="p-4  rounded-xl clients" style="background-color: #115185; background: linear-gradient(120deg, #1039a8, #470044);">
             <h2 class="mb-4 text-2xl font-semibold text-white">Newest clients</h2>
             <hr class="my-4 border-indigo-700">
-
             {% for client in clients %}
             <div class="mb-2 client">
                 <h3 class="text-xl font-bold text-white">{{ client.name }}</h3>
-
-                <a href="{% url 'clients:detail' client.pk %}" class="text-indigo-100 hover:text-indigo-200"> Details</a>
+                <a href="{% url 'clients:detail' client.pk %}" class="text-green-400 hover:text-red-300">Details</a>
             </div>
-
             {% endfor %}
-
         </div>
 
+        <div class="p-4 rounded-xl leads" style="background-color: #341185; background: linear-gradient(120deg, #1078a8, #47002c);">
+            <h2 class="mb-4 text-2xl font-semibold text-white">Newest leads</h2>
+            <hr class="my-4 border-indigo-700">
+            {% for lead in leads %}
+            <div class="mb-2 lead">
+                <h3 class="text-xl font-bold text-white">{{ lead.name }}</h3>
+                <p class="text-sm text-indigo-300">Status: {{ lead.get_status_display }}</p>
+                <p class="text-sm text-indigo-300">Priority: {{ lead.get_priority_display }}</p>
+                <a href="{% url 'leads:detail' lead.pk %}" class="text-green-400 hover:text-red-300">Details</a>
+            </div>
+            {% endfor %}
+        </div>
+       
+        <div class="flex justify-center items-center mt-9">
+            <div class="bg-gray-800 bg-opacity-50  rounded-lg p-10">
+                <a href="{% url 'clients:list_sales_activities' %}" class="text-white font-bold text-lg" style="text-decoration: none;">
+                    <div class="flex items-center">
+                        <span>Go to List of Sales Activities</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+
+        <fxwidget-er inverse="false" amount="100" decimals="2" large="false" shadow="true" symbol="true" flag="true" changes="true" grouping="true" border="false" main-curr="USD" sel-curr="BTC,EUR,GBP,AUD,CNY,JPY" background-color="#00416A" background="linear-gradient(120deg,#00416A,#E4E5E6)" border-radius="0.2"></fxwidget-er>
+        <script async src="https://s.fx-w.io/widgets/exchange-rates/latest.js"></script>
+    </div>
+    <br>
+    <hr>
+
+<!-- taxes function -->
+<div class="flex justify-center mt-9">
+    <div class="bg-gray-800  bg-opacity-50 rounded-lg p-4">
+        <h2 class="bg-indigo-900 text-white font-bold py-2 px-6 rounded">Taxes Calculator</h2>
     </div>
 </div>
 
-<footer class="py-8 text-center bg-gray-800">
-    <p class="text-xs">Copyright (c) 2024</p>
-</footer>
+    <br>
+    <form id="ivaCalculatorForm">
+        {% csrf_token %}
+        <input type="number" id="amountWithIVA" placeholder="Amount with tax" class="bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"><br>
+        <select id="ivaPercentage" class="bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+            <option value="0.22">22%</option>
+            <option value="0.21">21%</option>
+            <option value="0.19">19%</option>
+            <option value="0.16">16%</option>
+            <br>  
+        </select>
+        <br>
+        <button type="button" id="addButton" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add IVA</button><br>
+        <button type="button" id="subtractButton" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Subtract IVA</button>
+    </form><br>
+    <div id="ivaResult" class="mt-4"></div>
 </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("addButton").addEventListener("click", function() {
+            calculateIVA("add");
+        });
+
+        document.getElementById("subtractButton").addEventListener("click", function() {
+            calculateIVA("subtract");
+        });
+
+        function calculateIVA(action) {
+            var amountWithIVA = parseFloat(document.getElementById("amountWithIVA").value);
+            var ivaPercentage = parseFloat(document.getElementById("ivaPercentage").value);
+
+            var result;
+
+            if (action === "add") {
+                result = amountWithIVA * (1 + ivaPercentage);
+            } else if (action === "subtract") {
+                result = amountWithIVA / (1 + ivaPercentage);
+            }
+
+            document.getElementById("ivaResult").innerHTML = "Result: " + result.toFixed(2);
+        }
+    });
+</script>
+
+<footer class="py-8 text-center bg-gray-800">
+    <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+    <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+    <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+    <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+    <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+    <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+</footer>
 
 {% endblock %}

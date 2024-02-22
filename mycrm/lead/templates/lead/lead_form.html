@@ -3,6 +3,7 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+{% load widget_tweaks %}
 <div class="container mx-auto rounded-lg shadow-md overflow-hidden">
     <div class="p-6">
         
@@ -16,17 +17,17 @@
                     <label for="{{ form.name.id_for_label }}" class="font-semibold">Name:</label>
                     {{ form.name }}
                 </div>
-
+                
                 <div class="mb-4">
                     <label for="{{ form.email.id_for_label }}" class="font-semibold">Email:</label>
                     {{ form.email }}
                 </div>
-
-                <!-- Campo de descripción -->
-                <div class="mb-4">
-                    <label for="{{ form.description.id_for_label }}" class="font-semibold">Description:</label>
-                    {{ form.description }}
-                </div>
+                    <br>
+                    <div class="mb-4">
+                        <label for="{{ form.description.id_for_label }}" class="font-semibold">Description:</label>
+                        {{ form.description }}
+                    </div>
+                    
                 
                 <div class="mb-4">
                     <label for="{{ form.priority.id_for_label }}" class="font-semibold">Priority:</label>
@@ -39,7 +40,8 @@
                 </div>
           
 
-                <button class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
+                <button type="submit" class="py-2 px-4 bg-purple-600 rounded-md text-white">Submit</button>
+
             </form>
 
             <div class="space-x-2">
@@ -52,8 +54,14 @@
         {% endif %}
     </div>
 </div>
+<br><br>
 <footer class="py-8 text-center bg-gray-800">
-    <p class="text-xs text-white">Copyright (c) 2024</p>
+<p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+<p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+<p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+<p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+<p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+<p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
 </footer>
 
 {% endblock %}

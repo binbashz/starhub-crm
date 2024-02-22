@@ -5,29 +5,39 @@
 {% block content %}
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-4">Create Sales Activity</h1>
-        <form method="post" class="max-w-md mx-auto">
+        <form method="post" class="max-w-3xl mx-auto grid grid-cols-2 gap-6">
             {% csrf_token %}
-            <div class="mb-4">
+            <div class="col-span-2">
                 <label for="id_client" class="block text-white text-sm font-bold mb-2">Client:</label>
                 {{ form.client }}
             </div>
-            <div class="mb-4">
+            <div class="col-span-2">
                 <label for="id_description" class="block text-white text-sm font-bold mb-2">Description:</label>
                 {{ form.description }}
+                <p class="text-xs text-gray-400 mt-1">Enter a brief description of the sales activity.</p>
             </div>
-            <div class="mb-4">
+            <div>
                 <label for="id_amount" class="block text-white text-sm font-bold mb-2">Amount:</label>
                 {{ form.amount }}
             </div>
-            <div class="mb-6">
+            <div>
                 <label for="id_date" class="block text-white text-sm font-bold mb-2">Date:</label>
-                <input type="date" id="id_date" name="date" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                <input type="date" id="id_date" name="date" class="appearance-none bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
             </div>
             
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded col-span-2 focus:outline-none focus:shadow-outline">Submit</button>
         </form>
     </div>
 
 
-
+    <br><br>
+    <footer class="py-8 text-center bg-gray-800">
+        <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+        <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+        <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+        <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+        <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+        <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+    </footer>
 {% endblock %}
+

@@ -50,7 +50,7 @@
             <div class="mb-3">
                 <label for="id_plan" class="form-label">Plan</label>
                 <select name="plan" id="id_plan" class="form-select">
-                    <option value="" selected disabled>Selecciona un plan</option>
+                    <option value="" selected disabled>Select a plan</option>
                     {% for plan in form.plan.field.choices %}
                         <option value="{{ plan.0 }}">{{ plan.1 }}</option>
                     {% endfor %}
