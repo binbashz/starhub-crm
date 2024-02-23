@@ -16,6 +16,7 @@
         <div class="mb-3">
             <label for="id_password" class="form-label text-white">Password</label>
             <input type="password" name="password">
+            <p class="text-white mt-2">Don't have an account? <a href="{% url 'userprofile:signup' %}" class="text-blue-400 hover:underline">Sign up here</a>.</p>
         </div>
         <button type="submit">Sign Up</button>
     </form>

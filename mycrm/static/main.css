@@ -171,6 +171,28 @@ button[type="submit"]:hover {
     background-image: linear-gradient(to right, #485dbd, rgb(105, 24, 129));
 }
 
+
+/* sing up botton */
+
+.signup-button {
+    padding: 10px 20px;
+    background-image: linear-gradient(to right, rgb(65, 130, 160), rgb(2, 131, 51));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-image 0.9s ease; 
+  }
+  
+  .signup-button:hover {
+    background-image: linear-gradient(to right, rgb(65, 130, 160), #998f01, rgb(65, 11, 82));
+  }
+  
+
+
+
+
+
 /* Estilos para el botón de eliminación personalizado */
 .custom-delete-button-wrapper .custom-delete-button {
     background-color: purple;
@@ -216,6 +238,13 @@ select {
     font-weight: bold;
 }
 
+
+
+.join-us-text {
+    font-family: 'Arial', sans-serif; 
+    font-size: 2rem; 
+  }
+  
 
 
 

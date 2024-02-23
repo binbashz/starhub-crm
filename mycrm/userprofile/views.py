@@ -35,4 +35,3 @@ def signup(request):
 @login_required
 def myaccount(request):
     return render(request, 'userprofile/myaccount.html')
-

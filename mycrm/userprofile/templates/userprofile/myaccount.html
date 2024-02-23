@@ -1,22 +1,30 @@
 {% extends 'core/base.html' %}
 
-{% block title %} My account {% endblock %}
+{% block title %} My Account {% endblock %}
 
 {% block content %}
 <div class="py-6 px-6">
-    <h1 class="mb-6 text-xl">My account</h1>
+    <h1 class="mb-6 text-xl">My Account</h1>
+
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="inline-block py-2 px-4 rounded-xl bg-blue-700 text-white">Save Changes</button>
+    </form>
+
+    <hr class="mb-4">
 
     <p class="mb-2">
-        <strong>Username: </strong>{{ request.user.username}}
+        <strong>Username:</strong> {{ user.username }}
     </p>
 
     <p class="mb-2">
-        <strong>Team: </strong>{{ team.name }}
+        <strong>Team:</strong> {{ team.name }}
 
         {% if team.created_by == request.user %}
         <a href="{% url 'team:edit' team.id %}">(Edit)</a>
-
-        </a>
         {% endif %}
     </p>
 
@@ -26,13 +34,14 @@
 </div>
 
 <br><br>
- <footer class="py-8 text-center bg-gray-800">
-  <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
-  <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
-  <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
-  <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
-  <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
-  <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+
+<footer class="py-8 text-center bg-gray-800">
+    <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+    <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+    <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+    <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+    <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+    <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
 </footer>
 </div>
 {% endblock %}

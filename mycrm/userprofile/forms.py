@@ -39,4 +39,4 @@ class SignupForm(UserCreationForm):
         self.fields['plan'].choices = [(plan.id, plan.name) for plan in Plan.objects.all()]
 
     def label_suffix(self):
-        return ''  # Eliminar los dos puntos después de la etiqueta del campo
+        return ''  
