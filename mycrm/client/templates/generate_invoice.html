@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="py-6 px-6">
-    <h1 class="text-xl">Generate Invoice</h1>
+    <h1 class="text-2xl font-semibold text-center text-white py-3" style="background-image: linear-gradient(to right, #4CAF50 , #171444); border-radius: 10px;">Generate Invoice</h1>
+
     <br>
 
     <form action="{% url 'clients:generate_invoice' %}" method="post">
@@ -78,4 +79,18 @@
         <button type="submit">Generate Invoice</button>
     </form>
 </div>
+
+
+
+<br><br>
+<footer class="py-8 text-center bg-gray-800">
+ <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+ <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+ <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+ <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+ <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+ <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+</footer>
+
+
 {% endblock %}

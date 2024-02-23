@@ -16,7 +16,7 @@ def signup(request):
             email = form.cleaned_data['email']
             
             if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
-                messages.error(request, 'El usuario con este nombre de usuario o correo electrónico ya existe.')
+                messages.error(request, 'The user with this username or email already exists.')
                 return redirect('signup')
 
             user = form.save()
