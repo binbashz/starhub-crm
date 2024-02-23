@@ -27,8 +27,8 @@
         <hr class="my-4">
 
         <div class="space-x-2">
-            <a href="{% url 'clients:edit' client.id %}" class="py-2 px-4 rounded-lg bg-purple-500 text-white">Edit</a>
-            <a href="{% url 'clients:delete' client.id %}" class="py-2 px-4 rounded-lg bg-red-700 text-white">Delete</a>
+            <a href="{% url 'clients:edit' client.id %}" class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #20093d, #0b9ee2);">Edit</a>
+            <a href="{% url 'clients:delete' client.id %}" class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #1f0c53, #ff0000);">Delete</a>
         </div>
 
         <hr class="my-4">
@@ -36,9 +36,15 @@
         <a href="{% url 'clients:list' %}" class="block text-blue-500 mt-4">Back to clients</a>
     </div>
 
+    <br><br>
     <footer class="py-8 text-center bg-gray-800">
-        <p class="text-xs">Copyright (c) 2024</p>
-    </footer>
-</div>
+     <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+     <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+     <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+     <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+     <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+     <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+   </footer>
+   
 {% endblock %}
 

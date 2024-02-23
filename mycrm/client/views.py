@@ -19,8 +19,10 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Paragraph
 
 from django.conf import settings
+from django.http import JsonResponse
+from client.models import Client
 import os
-
+from .models import SalesActivity
 
 
 @login_required
@@ -247,4 +249,24 @@ def download_invoice(request):
         return HttpResponse("File not found, no recent files generated for download", status=404)
 
 
+def sales_activities_per_client(request):
+    clients = Client.objects.all()
+    data = []
+    for client in clients:
+        activities_count = client.sales_activities.count()
+        data.append({'client': client.name, 'activities_count': activities_count})
 
+    
+    return render(request, 'sales-activities-per-client.html', {'data': data})
+
+
+
+def delete_sales_activity(request, pk):
+    activity = get_object_or_404(SalesActivity, pk=pk)
+    if request.method == 'POST':
+        activity.delete()
+        
+        clients = Client.objects.all()
+        data = [{'client': client.name, 'activities_count': client.sales_activities.count()} for client in clients]
+        return render(request, 'sales-activities-per-client.html', {'data': data})
+    return render(request, 'sales-activities-per-client.html')  

@@ -9,18 +9,20 @@
 <a href="{% url 'clients:add' %}" class=" inline-block px-4 bg-green-600 rounded-md text-white">+ Add client</a>
 
 {% if clients %}
-<div class="mt-6 flex justify-between">
+<div class="mt-6">
     <p class="py-4 px-2 bg-gray-800 font-semibold w-full text-white">Name</p>
-  
 </div>
 <hr>
 
 {% for client in clients %}
-<div class="mt-6 flex justify-between">
-    <p class="py-2 w-full {% cycle 'bg-gray-700' '' %}">
-       <a href="{% url 'clients:detail' client.id %}"> {{ client.name }}</a>
-    </p>
-   
+<div class="mt-6">
+    <div class="py-2 {% cycle 'bg-gray-700' '' %}">
+        <p><a href="{% url 'clients:detail' client.id %}"><strong>{{ client.name|capfirst }}</strong></a></p>
+       <div class="text-sm">
+           <a href="{% url 'clients:detail' client.id %}" class="text-gray-500 block">Details</a>
+           <a href="{% url 'clients:edit' client.id %}" class="text-blue-500 block">Edit</a>
+       </div>
+    </div>
 </div>
 
 {% endfor %}
@@ -29,7 +31,7 @@
 {% endif %}
 </div>
 
-<br>
+<br><br>
 <footer class="py-8  mt-11 text-center bg-gray-800">
 <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
 <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>

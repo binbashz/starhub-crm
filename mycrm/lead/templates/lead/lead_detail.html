@@ -68,24 +68,29 @@
 
 
 <hr class="my-4">
-<h2 class="mb-6 text-xl font-bold">Files</h2>
+<h2 class="mb-6 text-xl font-bold">Files</h2>  <small style="color: rgb(32, 167, 185);">Record from</small> <h3 class="text-xl font-bold text-white">{{ lead.name }}</h3>
 
 <div class="space-y-4">
     {% for file in lead.files.all %}
         <div class="bg-red p-4 rounded-lg shadow-md">
-            <p><strong>{{ file.created_by }}</strong> @ {{ file.created_at }}</p>
-            <a href="{{ file.file.url }}"> Download</a>
+            <p>
+                <small style="color: rgb(32, 167, 185);">Uploaded by</small> 
+                <strong>{{ file.created_by }}</strong> @ {{ file.created_at }}
+            </p>
+            <a href="{{ file.file.url }}" style="color: rgb(255, 255, 255);"><strong>Click to download file</strong> &nbsp; &nbsp;(<small>Related to Lead:</small> {{ lead.name }})</a>
         </div>
     {% endfor %}
 </div>
 
-<form method="post" action="{% url 'leads:add_file' lead.id %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ fileform.as_p }}
-    
-    <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
-</form>
+<div id="upload-image-form">
+    <form method="post" action="{% url 'leads:add_file' lead.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ fileform.as_p }}
+        
+        <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
+    </form>
 </div>
+
 
 <a href="{% url 'leads:list' %}" class="block text-blue-500 mt-4">Back to leads</a>
 

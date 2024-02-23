@@ -15,8 +15,10 @@
                 <li class="py-2 border-b">
                     <form action="{% url 'clients:delete_sales_activity' activity.pk %}" method="post" style="display: inline;">
                         {% csrf_token %}
-                        <button type="submit">Delete</button>
-                    </form>
+                        <div class="custom-delete-button-wrapper" style="display: inline-block;">
+                            <button type="submit" class="custom-delete-button">Delete</button>
+                            <span style="display: inline-block; margin-left: 10px;">{{ activity.nombre }}</span>
+                        </div>
                     {{ activity.client.name }} - {{ activity.description }} - {{ activity.amount }} - {{ activity.date }}
                 </li>
             {% endfor %}

@@ -22,25 +22,36 @@
         <div class="p-4 rounded-xl leads" style="background-color: #341185; background: linear-gradient(120deg, #1078a8, #47002c);">
             <h2 class="mb-4 text-2xl font-semibold text-white">Newest leads</h2>
             <hr class="my-4 border-indigo-700">
-            {% for lead in leads %}
+            {% for lead in leads|slice:":2" %}
             <div class="mb-2 lead">
                 <h3 class="text-xl font-bold text-white">{{ lead.name }}</h3>
                 <p class="text-sm text-indigo-300">Status: {{ lead.get_status_display }}</p>
                 <p class="text-sm text-indigo-300">Priority: {{ lead.get_priority_display }}</p>
                 <a href="{% url 'leads:detail' lead.pk %}" class="text-green-400 hover:text-red-300">Details</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="{% url 'leads:detail' lead.pk %}" class="text-green-400 hover:text-red-300">Comment</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="{% url 'leads:detail' lead.pk %}#upload-image-form" class="text-green-400 hover:text-red-300">Upload Image</a>
+
             </div>
             {% endfor %}
-        </div>
+      </div>
        
         <div class="flex justify-center items-center mt-9">
-            <div class="bg-gray-800 bg-opacity-50  rounded-lg p-10">
-                <a href="{% url 'clients:list_sales_activities' %}" class="text-white font-bold text-lg" style="text-decoration: none;">
-                    <div class="flex items-center">
-                        <span>Go to List of Sales Activities</span>
-                    </div>
+            <div class="bg-gray-800 bg-opacity-50 rounded-lg overflow-hidden border border-gray-400">
+                <a href="{% url 'clients:list_sales_activities' %}" class="block relative z-10 py-3 px-6 text-lg font-bold text-white transition duration-300 ease-in-out hover:bg-gray-700 hover:text-gray-200">
+                    go to List of Sales Activities
                 </a>
+                <div class="mt-4">
+                    <a href="{% url 'clients:sales_activities_per_client' %}" class="block relative z-10 py-3 px-6 text-lg font-bold text-white transition duration-300 ease-in-out hover:bg-gray-700 hover:text-gray-200">
+                        go to Sale Activities per Client
+                    </a>
+                </div>
             </div>
         </div>
+        
+        
+        
         
 
         <fxwidget-er inverse="false" amount="100" decimals="2" large="false" shadow="true" symbol="true" flag="true" changes="true" grouping="true" border="false" main-curr="USD" sel-curr="BTC,EUR,GBP,AUD,CNY,JPY" background-color="#00416A" background="linear-gradient(120deg,#00416A,#E4E5E6)" border-radius="0.2"></fxwidget-er>
@@ -51,10 +62,11 @@
 
 <!-- taxes function -->
 <div class="flex justify-center mt-9">
-    <div class="bg-gray-800  bg-opacity-50 rounded-lg p-4">
+    <div class="bg-gray-800 rounded-lg p-4" style="background-color: rgba(25, 13, 134, 0.8); background: linear-gradient(120deg, #1f1558, #2f2f46);">
         <h2 class="bg-indigo-900 text-white font-bold py-2 px-6 rounded">Taxes Calculator</h2>
     </div>
 </div>
+
 
     <br>
     <form id="ivaCalculatorForm">

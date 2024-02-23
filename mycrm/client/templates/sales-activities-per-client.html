@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Sales Activities per Client{% endblock %}
+
+{% block content %}
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-4">Sales Activities per Client</h1>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-bold mb-2">Sales Activities Details</h2>
+            {% if data %}
+            <ul>
+                {% for item in data %}
+                <li>{{ item.client }} - {{ item.activities_count }} activities</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No sales activities data available.</p>
+            {% endif %}
+        </div>
+
+        <div class="w-3/4 mx-auto"> 
+            <canvas id="salesActivitiesPerClientChart" class="mt-8"></canvas>
+        </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var clientNames = [];
+        var activitiesCount = [];
+
+        // Extracting data from the provided data object
+        {% for item in data %}
+            clientNames.push("{{ item.client }}");
+            activitiesCount.push("{{ item.activities_count }}");
+        {% endfor %}
+
+        // Chart.js configuration
+        var ctx = document.getElementById('salesActivitiesPerClientChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: clientNames,
+                datasets: [{
+                    label: 'Activities Count',
+                    data: activitiesCount,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)', 
+                    borderColor: 'rgba(255, 99, 132, 1)', 
+                    borderWidth: 2 
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Sales Activities per Client' // Add title to the chart
+                },
+                legend: {
+                    display: false // Hide legend
+                }
+            }
+        });
+    </script>
+{% endblock %}
