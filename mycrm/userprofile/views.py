@@ -6,11 +6,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignupForm
 from .models import Userprofile
 from team.models import Team, Plan 
+from django.contrib.auth.models import User
 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            
+            if User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists():
+                messages.error(request, 'El usuario con este nombre de usuario o correo electrónico ya existe.')
+                return redirect('signup')
+
             user = form.save()
             plan_id = form.cleaned_data['plan']
             plan = Plan.objects.get(id=plan_id)

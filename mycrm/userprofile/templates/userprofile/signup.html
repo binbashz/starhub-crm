@@ -29,26 +29,27 @@
         <form method="post" action=".">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="id_username" class="form-label">Username</label>
+                <label for="id_username" class="form-label" style="color: white;">Username</label>
+
                 {{ form.username }}
             </div>
          
             <div class="mb-3">
-                <label for="id_email" class="form-label">Email</label>
+                <label for="id_email" class="form-label" style="color: white;"></label>Email</label>
                 {{ form.email }}
             </div>
 
             <div class="mb-3">
-                <label for="id_password1" class="form-label">Password</label>
+                <label for="id_password1" class="form-label" style="color: white;">Password</label>
                 {{ form.password1 }}
             </div>
             <div class="mb-3">
-                <label for="id_password2" class="form-label">Confirm Password</label>
+                <label for="id_password2" class="form-label" style="color: white;">Confirm Password</label>
                 {{ form.password2 }}
             </div>
 
             <div class="mb-3">
-                <label for="id_plan" class="form-label">Plan</label>
+                <label for="id_plan" class="form-label" style="color: white;">Plan</label>
                 <select name="plan" id="id_plan" class="form-select">
                     <option value="" selected disabled>Select a plan</option>
                     {% for plan in form.plan.field.choices %}
@@ -65,7 +66,11 @@
        <br>
 
        <footer class="py-8 text-center bg-gray-800">
-        <p class="text-xs">Copyright (c) 2024</p>
-    </footer>
-    </div>
+        <p class="text-xs text-gray-200">Copyright (c) 2024 StrHub CRM. All rights reserved.</p>
+        <p class="text-xs text-gray-200">Unlocking Your Business Potential | Obtain a Quick Overview of the Status of Every Negotiation | Up to 10 leads with the basic plan</p>
+        <p class="text-xs text-gray-200">Leads: Create, edit, and track lead information. Convert leads to clients seamlessly. Add images and comments.</p>
+        <p class="text-xs text-gray-200">Clients: Display, add, edit, and delete client information. Implement solutions tailored for teams.</p>
+        <p class="text-xs text-gray-200">Features: Latest clients and leads on our dashboard. Create Sales Activity. Graph sales activities. Create PDF invoices from a form.</p>
+        <p class="text-xs text-gray-200">Contact us at imcorreamauricio@gmail.com | Follow us on Twitter, Facebook, and LinkedIn</p>
+      </footer>
 {% endblock %}
