@@ -2,11 +2,13 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-
-from .forms import SignupForm
+from .forms import SignupForm, ProfileForm
 from .models import Userprofile
 from team.models import Team, Plan 
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
 def signup(request):
     if request.method == 'POST':
@@ -34,4 +36,19 @@ def signup(request):
 
 @login_required
 def myaccount(request):
-    return render(request, 'userprofile/myaccount.html')
+    user_profile = request.user.userprofile
+    return render(request, 'userprofile/myaccount.html', {'user_profile': user_profile})
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = Userprofile
+    form_class = ProfileForm
+    template_name = 'userprofile/myaccount.html'
+    success_url = reverse_lazy('myaccount')
+
+    def get_object(self):
+        return self.request.user.userprofile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()  # Pasa el formulario al contexto
+        return context

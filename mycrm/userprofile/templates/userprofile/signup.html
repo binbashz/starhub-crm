@@ -53,6 +53,7 @@
                         <option value="" selected disabled>Select a plan</option>
                         {% for plan in form.plan.field.choices %}
                             <option value="{{ plan.0 }}">{{ plan.1 }}</option>
+                            <option value="{{ plan.1 }}">{{ plan.0 }}</option>
                         {% endfor %}
                     </select>
                 </div>

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from team.models import Plan
+from .models import Userprofile
 
 INPUT_CLASS = 'w-full my-4 py-4 px-6 rounded-xl bg-gray-100'
 
@@ -40,3 +41,32 @@ class SignupForm(UserCreationForm):
 
     def label_suffix(self):
         return ''  
+    
+    
+    
+
+class ProfileForm(forms.ModelForm):
+    # Este formulario permite al usuario cambiar su email y su imagen de perfil
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = Userprofile
+        fields = ['email', 'avatar']
+
+    def clean_email(self):
+        
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exclude(username=self.instance.user.username).exists():
+            raise forms.ValidationError('This email address is already in use.')
+        return email
+
+    def save(self, commit=True):
+        
+        user = self.instance.user
+        user.email = self.cleaned_data['email']
+        user.save()
+        profile = super(ProfileForm, self).save(commit=False)
+        profile.user = user
+        if commit:
+            profile.save()
+        return profile
