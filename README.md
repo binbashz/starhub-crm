@@ -56,10 +56,13 @@ StarHub CRM is a modern and efficient Customer Relationship Management (CRM) app
 - **Team Solutions:**
   - Implement solutions specific to teams.
 
-### Payment Plan
 
-- **Payment Plan:**
-  - Develop and implement a payment plan.
+
+
+https://github.com/binbashz/starhub-crm/assets/124454895/29f469ce-ce7e-4036-9227-509ee611943a
+
+
+
 
 ## Getting Started
 
