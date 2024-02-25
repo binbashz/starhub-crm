@@ -34,21 +34,23 @@
             <p>{{ lead.modified_at }}</p>
         </div>
 
-        <hr class="my-4">
-
+        <hr class="my-9">
+        
         <form id="lead_delete_form" method="post" action="{% url 'leads:delete' lead.id %}">
             {% csrf_token %}
             <div class="space-x-2">
-                <a href="{% url 'leads:convert' lead.id %}" class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #31054e, #02a164);"">Convert to client</a>
+                <a href="{% url 'leads:convert' lead.id %}"  id="destino" class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #31054e, #02a164);"">Convert to client</a> 
+
                 <a href="{% url 'leads:edit' lead.id %}" class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #20093d, #0b9ee2);">Edit</a>
                 <a href="#" onclick="document.getElementById('lead_delete_form').submit();"  class="py-2 px-4 rounded-lg text-white" style="background-image: linear-gradient(to right, #1f0c53, #ff0000);">Delete</a>
         </form>
     </div>
 
+    <br>
     <div class="p-6 rounded-b-lg">
         <h2 class="mb-6 text-xl font-bold">Comments</h2>
-
         <div class="space-y-4">
+            </div>
             {% for comment in lead.comments.all %}
                 <div class="bg-red p-4 rounded-lg shadow-md">
                     <p><strong>{{ comment.created_by }}</strong> @ {{ comment.created_at }}</p>
@@ -61,7 +63,7 @@
             {% csrf_token %}
             <p><input type="text" name="content" class="comment-input"></p>
             
-            <button type="submit" class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
+            <button type="submit"  class="block w-full py-2 px-4 mt-4 rounded-lg bg-purple-900 text-white">Submit</button>
         </form>
     </div>
 
